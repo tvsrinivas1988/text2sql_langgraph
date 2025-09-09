@@ -9,15 +9,17 @@ import re
 import os
 from dotenv import load_dotenv
 load_dotenv()
+import streamlit as st
 
 def strip_think_block(text: str) -> str:
     return re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL).strip()
+
 model_name = 'openai/gpt-oss-20b'
 #model_name = 'qwen/qwen3-32b'
 #model_name = 'deepseek-r1-distill-llama-70b'
-
+api_key=st.secrets["OPENAI_API_KEY"]
 #model = ChatGroq(temperature=0, model_name=model_name,response_format={"type": "text"})
-model=ChatOpenAI(model="gpt-4o",temperature=0)
+model=ChatOpenAI(model="gpt-4o",temperature=0,api_key=api_key)
 ##model = model | RunnableLambda(strip_think_block)
 
 ################################################ Sub question #############################
