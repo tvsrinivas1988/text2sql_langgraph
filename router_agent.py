@@ -2,6 +2,7 @@ import os
 import json
 import re
 from dotenv import load_dotenv
+import streamlit as st
 
 from groq import Groq
 from langchain_groq import ChatGroq
@@ -10,11 +11,12 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnableMap
 
 load_dotenv()
-
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
+api_key=st.secrets["GROQ_API_KEY"]
+##os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 
 model = ChatGroq(
     model="openai/gpt-oss-20b",
+    api_key=api_key,
     temperature=0,
     max_tokens=None
 )
